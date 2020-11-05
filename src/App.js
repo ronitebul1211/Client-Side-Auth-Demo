@@ -1,5 +1,5 @@
 import React from "react";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import "./App.css";
 //Components
 import Navbar from "./components/Navbar";
@@ -35,7 +35,7 @@ class App extends React.Component {
 
    render() {
       return (
-         <BrowserRouter>
+         <React.Fragment>
             <Navbar isAuthenticated={this.state.isAuthenticated} handleSignOut={this.handleSignOut} />
             <div className="page-container">
                <Switch>
@@ -51,7 +51,7 @@ class App extends React.Component {
                   <Route path="*" exact component={PageNotFound} />
                </Switch>
             </div>
-         </BrowserRouter>
+         </React.Fragment>
       );
    }
 }
