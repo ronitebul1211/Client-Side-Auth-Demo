@@ -1,0 +1,22 @@
+
+Token-based Authentication -> store the JSON Web Token (JWT) on Client side - Local Storage 
+
+1. Browser send login data -> server
+2. server create JWT with secret(?)
+3. server return browser JWT
+4. Browser send authenticated request with JWT in header
+5. server validate JWT and return response
+
+JWT: consist from 3 parts: header.payload.signature 
+Client attaches JWT in x-access-token header 
+x-access-token: [header].[payload].[signature]
+
+In-depth Introduction to JWT-JSON Web Token -> https://bezkoder.com/jwt-json-web-token/
+
+------------------------------------------------------------------------------------------
+
+User Registration and User Login Flow
+# POST api/auth/signup for User Registration
+# POST api/auth/signin for User Login
+
+This React Client must add a JWT to HTTP Header before sending request to protected resources.
