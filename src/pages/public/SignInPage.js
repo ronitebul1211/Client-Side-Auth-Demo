@@ -1,8 +1,15 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
+import authService from "../../service/authService";
 
 class SignInPage extends React.Component {
    state = { redirect: false };
+
+   componentDidMount = () => {
+      if (authService.isAuthenticated()) {
+         this.setState({ redirect: true });
+      }
+   };
 
    handleSignIn = () => {
       //Success -> response with token
