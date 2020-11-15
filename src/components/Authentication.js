@@ -4,6 +4,7 @@ import { withAuth0 } from "@auth0/auth0-react";
 class AuthenticationButton extends React.Component {
    render() {
       const { isAuthenticated, logout, loginWithRedirect } = this.props.auth0;
+      console.log(this.props.location);
       return isAuthenticated ? (
          <li
             onClick={() => {

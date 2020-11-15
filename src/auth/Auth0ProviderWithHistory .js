@@ -6,11 +6,8 @@ class Auth0ProviderWithHistory extends React.Component {
    domain = process.env.REACT_APP_AUTH0_DOMAIN;
    clientId = process.env.REACT_APP_AUTH0_CLIENT_ID;
 
-   onRedirectCallback = (appState) => {
-      console.log(appState);
-      const pathHistory = this.props.location.state;
-      const referrerPath = pathHistory ? pathHistory.from : "/dashboard";
-      this.props.history.push(referrerPath);
+   onRedirectCallback = () => {
+      this.props.history.push("/dashboard");
    };
 
    render() {

@@ -14,40 +14,20 @@ import HomePage from "./pages/public/HomePage";
 
 //AUTH0
 import { withAuth0 } from "@auth0/auth0-react";
+import ProtectedRoute from "./auth/ProtectedRoute";
 
 class App extends React.Component {
-   // state = { isAuthenticated: false };
-
-   // componentDidMount() {
-   //    this.setState({ isAuthenticated: authService.isAuthenticated() });
-   // }
-
-   // handleSignOut = () => {
-   //    authService.logout();
-   //    this.setState({ isAuthenticated: authService.isAuthenticated() });
-   // };
-
-   // handleSignIn = () => {
-   //    authService.login("roni", "123");
-   //    this.setState({ isAuthenticated: authService.isAuthenticated() });
-   // };
-
    render() {
       const { isLoading } = this.props.auth0;
       return isLoading ? (
          <div>Loading ....</div>
       ) : (
          <React.Fragment>
-            <Navbar isAuthenticated={this.state.isAuthenticated} handleSignOut={this.handleSignOut} />
+            <Navbar />
             <div className="page-container">
                <Switch>
-                  <PrivateRoute path="/dashboard" component={DashboardPage} />
-                  <PrivateRoute path="/settings" component={SettingsPage} />
-                  <Route
-                     path="/sign-in"
-                     exact
-                     render={(props) => <SignInPage {...props} onSignInCallback={this.handleSignIn} />}
-                  />
+                  <ProtectedRoute path="/dashboard" component={DashboardPage} />
+                  <ProtectedRoute path="/settings" component={SettingsPage} />
                   <Route path="/" exact component={HomePage} />
                   <Route path="*" exact component={PageNotFound} />
                </Switch>

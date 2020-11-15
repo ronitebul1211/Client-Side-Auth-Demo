@@ -1,7 +1,8 @@
 import React from "react";
 import { Route } from "react-router-dom";
 import { withAuthenticationRequired } from "@auth0/auth0-react";
-import { Loading } from "../components/index";
+
+import Authentication from "../components/Authentication";
 
 /**
  When you wrap your components in the withAuthenticationRequired Higher-Order Component 
@@ -16,7 +17,7 @@ class ProtectedRoute extends React.Component {
       return (
          <Route
             component={withAuthenticationRequired(this.props.component, {
-               onRedirecting: () => <Loading />,
+               onRedirecting: () => <Authentication />,
             })}
             {...this.props.args}
          />
