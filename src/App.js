@@ -10,31 +10,33 @@ import SettingsPage from "./pages/protected/SettingsPage";
 //Public Page
 import PageNotFound from "./pages/public/PageNotFound";
 import SignInPage from "./pages/public/SignInPage";
-import SignUpPage from "./pages/public/SignUpPage";
 import HomePage from "./pages/public/HomePage";
 
-// Service
-import authService from "./service/authService";
+//AUTH0
+import { withAuth0 } from "@auth0/auth0-react";
 
 class App extends React.Component {
-   state = { isAuthenticated: false };
+   // state = { isAuthenticated: false };
 
-   componentDidMount() {
-      this.setState({ isAuthenticated: authService.isAuthenticated() });
-   }
+   // componentDidMount() {
+   //    this.setState({ isAuthenticated: authService.isAuthenticated() });
+   // }
 
-   handleSignOut = () => {
-      authService.logout();
-      this.setState({ isAuthenticated: authService.isAuthenticated() });
-   };
+   // handleSignOut = () => {
+   //    authService.logout();
+   //    this.setState({ isAuthenticated: authService.isAuthenticated() });
+   // };
 
-   handleSignIn = () => {
-      authService.login("roni", "123");
-      this.setState({ isAuthenticated: authService.isAuthenticated() });
-   };
+   // handleSignIn = () => {
+   //    authService.login("roni", "123");
+   //    this.setState({ isAuthenticated: authService.isAuthenticated() });
+   // };
 
    render() {
-      return (
+      const { isLoading } = this.props.auth0;
+      return isLoading ? (
+         <div>Loading ....</div>
+      ) : (
          <React.Fragment>
             <Navbar isAuthenticated={this.state.isAuthenticated} handleSignOut={this.handleSignOut} />
             <div className="page-container">
@@ -46,7 +48,6 @@ class App extends React.Component {
                      exact
                      render={(props) => <SignInPage {...props} onSignInCallback={this.handleSignIn} />}
                   />
-                  <Route path="/sign-up" exact component={SignUpPage} />
                   <Route path="/" exact component={HomePage} />
                   <Route path="*" exact component={PageNotFound} />
                </Switch>
@@ -56,4 +57,4 @@ class App extends React.Component {
    }
 }
 
-export default App;
+export default withAuth0(App);
